@@ -1,6 +1,5 @@
 package br.edu.univas;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Questao1 {
@@ -22,19 +21,30 @@ public class Questao1 {
                 }
         } while (valor > 0);
 
-        Arrays.sort(valoresVendas);
-        System.out.println(Arrays.toString(valoresVendas));
-        minVendas = valoresVendas[valoresVendas.length - vendas];
-        maxVendas = valoresVendas[valoresVendas.length - 1];
+        for(int i = 0; i < vendas - 1; i++) {
+            boolean estaOrdenado = true;
+            for(int j = 0; j < vendas - 1 - i; j++) {
+                if(valoresVendas[j] > valoresVendas[j + 1]) {
+                    float aux = valoresVendas[j];
+                    valoresVendas[j] = valoresVendas[j + 1];
+                    valoresVendas[j + 1] = aux;
+                    estaOrdenado = false;
+                }
+            }
+            if(estaOrdenado) break;
+        }
+
+        minVendas = valoresVendas[0];
+        maxVendas = valoresVendas[vendas - 1];
 
         for (float valoresVenda : valoresVendas) {
             mediaVendas += valoresVenda;
         }
         mediaVendas = mediaVendas / vendas;
 
-        System.out.printf("O valor da menor venda foi: R$ %.2f", minVendas);
+        System.out.printf("O menor preço das vendas foi: R$ %.2f", minVendas);
         System.out.println();
-        System.out.printf("O valor da maior venda foi: R$ %.2f", maxVendas);
+        System.out.printf("O maior preço das vendas foi: R$ %.2f", maxVendas);
         System.out.println();
         System.out.printf("O preço médio das vendas foi: R$ %.2f", mediaVendas);
         System.out.println();
